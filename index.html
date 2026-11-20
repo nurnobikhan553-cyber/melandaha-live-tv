@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#071426">
+  <meta name="description" content="Melandaha Live TV - watch authorized live streams in one place.">
+  <title>Melandaha Live TV</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#"><span class="brand-mark">M</span><span>MELANDAHA <b>LIVE TV</b></span></a>
+    <nav class="socials" aria-label="Social links">
+      <a href="#" aria-label="Facebook">f</a><a href="#" aria-label="YouTube">▶</a><a href="#" aria-label="Telegram">➤</a>
+    </nav>
+  </header>
+  <main class="layout">
+    <section class="watch-column">
+      <div class="section-heading"><div><span class="eyebrow">LIVE STREAMING</span><h1 id="now-title">Welcome to Melandaha Live TV</h1></div><span class="live-pill"><i></i> LIVE</span></div>
+      <div class="player-shell">
+        <video id="video" controls playsinline></video>
+        <div class="poster" id="poster">
+          <div class="poster-glow"></div>
+          <div class="poster-content"><span class="poster-kicker">YOUR LOCAL STREAMING HUB</span><h2>MELANDAHA<br><strong>LIVE TV</strong></h2><p>Watch your favourite channels in one place</p><button id="play-button" class="play-button">▶ &nbsp; CLICK TO PLAY</button></div>
+          <div class="poster-orb">LIVE<br><b>TV</b></div>
+        </div>
+      </div>
+      <div class="player-meta"><div><span class="muted">NOW PLAYING</span><strong id="playing-name">Select a channel to begin</strong></div><label class="server-label">SERVER <select id="server-select" disabled><option>Default</option></select></label></div>
+      <p class="hint" id="player-hint">Choose a channel from the list to load its stream.</p>
+    </section>
+    <aside class="channel-panel">
+      <div class="panel-head"><div><span class="eyebrow">CHANNEL GUIDE</span><h2>All Channels</h2></div><span class="count" id="channel-count">0</span></div>
+      <input id="search" class="search" type="search" placeholder="Search channels..." aria-label="Search channels">
+      <div class="filters" id="filters"><button class="filter active" data-category="All">All</button><button class="filter" data-category="News">News</button><button class="filter" data-category="Entertainment">Entertainment</button><button class="filter" data-category="Sports">Sports</button></div>
+      <div class="channel-list" id="channel-list"></div>
+      <p class="panel-note">Only add streams you own or are authorized to embed.</p>
+    </aside>
+  </main>
+  <footer>© <span id="year"></span> Melandaha Live TV. All rights reserved.</footer>
+  <script src="channels.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
