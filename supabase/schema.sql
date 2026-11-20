@@ -1,0 +1,10 @@
+create table if not exists public.channels(id uuid primary key default gen_random_uuid(),name text not null,category text not null default 'Other',country text not null default 'International',stream_url text not null,logo_url text,is_active boolean not null default true,created_at timestamptz not null default now());
+alter table public.channels enable row level security;
+create policy "Public reads active channels" on public.channels for select using(is_active=true);
+create table if not exists public.admin_users(user_id uuid primary key references auth.users(id) on delete cascade);alter table public.admin_users enable row level security;
+create policy "Admin reads admin list" on public.admin_users for select to authenticated using(user_id=auth.uid());
+create policy "Admin reads all channels" on public.channels for select to authenticated using(exists(select 1 from public.admin_users where user_id=auth.uid()));
+create policy "Admin inserts channels" on public.channels for insert to authenticated with check(exists(select 1 from public.admin_users where user_id=auth.uid()));
+create policy "Admin updates channels" on public.channels for update to authenticated using(exists(select 1 from public.admin_users where user_id=auth.uid())) with check(exists(select 1 from public.admin_users where user_id=auth.uid()));
+create policy "Admin deletes channels" on public.channels for delete to authenticated using(exists(select 1 from public.admin_users where user_id=auth.uid()));
+-- Create an Auth user, then insert their UUID: insert into public.admin_users(user_id) values ('YOUR-USER-UUID');
