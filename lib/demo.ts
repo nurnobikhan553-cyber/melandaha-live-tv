@@ -1,0 +1,2 @@
+export type Channel={id:string;name:string;category:string;country:string;stream_url:string;logo_url?:string|null;is_active:boolean};
+export const demoChannels:Channel[]=[{id:"demo-1",name:"Demo News",category:"News",country:"Bangladesh",stream_url:"",is_active:true},{id:"demo-2",name:"Demo Sports",category:"Sports",country:"International",stream_url:"",is_active:true},{id:"demo-3",name:"Demo Entertainment",category:"Entertainment",country:"Bangladesh",stream_url:"",is_active:true}];
