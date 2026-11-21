@@ -25,3 +25,8 @@ aside .music-choice img{width:112px}
 aside .music-choice span{min-width:0}
 @media(max-width:800px){aside .music-grid{max-height:420px}}
 @media(max-width:480px){.server-switch button{font-size:12px;padding:11px 6px}.player{min-height:190px}.now{align-items:flex-start}.now b{font-size:13px}}
+
+.music-category-buttons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.music-category-buttons button{padding:11px 8px;border:1px solid #34445a;border-radius:9px;background:#1a2637;color:#f4f7fb;font-weight:700;cursor:pointer}
+.music-category-buttons button:hover{border-color:#12c99a;background:#142e35}
+.music-category-buttons button:disabled{opacity:.5;cursor:not-allowed}
