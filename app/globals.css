@@ -115,3 +115,8 @@ aside{padding:17px;background:linear-gradient(180deg,#121d30,#101827);gap:12px}.
 .official-stream-card h2{margin:0;font-size:clamp(18px,3vw,28px)}
 .official-stream-card p{max-width:520px;margin:0;color:#c5d3e4;font-size:14px;line-height:1.7}
 .official-stream-card .website-fallback{display:inline-flex;align-items:center;justify-content:center;margin-top:8px;padding:12px 22px;border-radius:24px;background:#e32636;color:white;font-weight:800;text-decoration:none}
+
+
+/* APK download action in the site header */
+.download-app-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:10px 14px;border-radius:9px;background:linear-gradient(110deg,#087d4b,#0b9b58);border:1px solid #38c98b;color:#fff;text-decoration:none;font-size:13px;font-weight:800;white-space:nowrap;box-shadow:0 5px 16px #087d4b33}.download-app-btn:hover{filter:brightness(1.12);transform:translateY(-1px)}
+@media(max-width:480px){.download-app-btn{padding:8px 9px;font-size:10px}.header-actions{flex-wrap:wrap;justify-content:flex-end}.header-admin{padding:8px;font-size:11px}}
