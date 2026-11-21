@@ -90,3 +90,9 @@ aside{padding:17px;background:linear-gradient(180deg,#121d30,#101827);gap:12px}.
 /* Prevent the old diagonal poster decoration from covering the uploaded banner */
 .poster-image:after{display:none!important;content:none!important}
 .poster-image .poster-banner-image{object-fit:contain}
+
+
+/* Final override: the legacy poster diagonal must never cover the uploaded artwork */
+.player .poster.poster-image::after{display:none!important;visibility:hidden!important;opacity:0!important;content:none!important;width:0!important;height:0!important;border:0!important;background:none!important;}
+.player .poster.poster-image{display:block!important;position:relative!important;width:100%!important;height:100%!important;min-height:0!important;padding:0!important;background:#071426!important;overflow:hidden!important;}
+.player .poster.poster-image .poster-banner-image{position:absolute!important;inset:0!important;display:block!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;object-fit:contain!important;object-position:center!important;}
