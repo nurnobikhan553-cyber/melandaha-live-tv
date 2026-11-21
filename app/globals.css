@@ -96,3 +96,8 @@ aside{padding:17px;background:linear-gradient(180deg,#121d30,#101827);gap:12px}.
 .player .poster.poster-image::after{display:none!important;visibility:hidden!important;opacity:0!important;content:none!important;width:0!important;height:0!important;border:0!important;background:none!important;}
 .player .poster.poster-image{display:block!important;position:relative!important;width:100%!important;height:100%!important;min-height:0!important;padding:0!important;background:#071426!important;overflow:hidden!important;}
 .player .poster.poster-image .poster-banner-image{position:absolute!important;inset:0!important;display:block!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;object-fit:contain!important;object-position:center!important;}
+
+
+/* Uploaded Melandaha Live TV header logo */
+.brand-mark{overflow:hidden;display:flex;align-items:center;justify-content:center;background:transparent!important;padding:0;border:0;box-shadow:none}
+.brand-mark img{display:block;width:100%;height:100%;object-fit:contain}
