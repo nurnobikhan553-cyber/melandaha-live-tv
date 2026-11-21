@@ -78,4 +78,4 @@ aside{padding:17px;background:linear-gradient(180deg,#121d30,#101827);gap:12px}.
 
 
 /* TV channel brand marks */
-.channel-logo{position:relative;display:grid;place-items:center;flex:0 0 46px;width:46px;height:46px;overflow:hidden;border-radius:10px;background:#fff;border:1px solid #52647c}.channel-logo img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:3px;background:#fff}.channel-logo b{position:relative;z-index:0;display:grid;place-items:center;width:100%;height:100%;background:linear-gradient(145deg,#f32635,#087d4b);color:#fff;font-size:13px}.channel-logo img:not([style*="display: none"])+b{visibility:hidden}
+.channel-logo{position:relative;display:grid;place-items:center;flex:0 0 46px;width:46px;height:46px;overflow:hidden;border-radius:10px;background:#fff;border:1px solid #52647c}.channel-logo img{position:absolute;inset:0;z-index:1;width:100%;height:100%;object-fit:contain;padding:3px;background:#fff}.channel-logo b{position:relative;z-index:0;display:grid;place-items:center;width:100%;height:100%;background:linear-gradient(145deg,#f32635,#087d4b);color:#fff;font-size:13px}
