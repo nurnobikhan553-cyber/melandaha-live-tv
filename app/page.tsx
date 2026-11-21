@@ -11,7 +11,13 @@ export default function Home(){
   const [selected,setSelected]=useState<Channel|null>(demoChannels[0]);
   const [category,setCategory]=useState("All Categories");
   const [query,setQuery]=useState("");
-  const [server,setServer]=useState<1|2>(1);
+  const [server,setServer]=useState<1|2|3>(1);\n  const sportsChannels=[
+    {id:"t-sports",name:"T Sports",country:"Bangladesh",stream_url:"https://www.youtube.com/@tsportsbd/live",note:"Official YouTube live / videos"},
+    {id:"sony-sports",name:"Sony Sports Network",country:"India",stream_url:"https://www.youtube.com/@SonySportsNetwork/live",note:"Official YouTube live / videos"},
+    {id:"star-sports",name:"Star Sports",country:"India",stream_url:"https://www.youtube.com/@StarSports/live",note:"Official YouTube live / videos"}
+  ];
+  const [selectedSport,setSelectedSport]=useState(sportsChannels[0]);
+
   const starterVideos:MusicVideo[]=[
     {id:"-qOpyOQ8sMc",title:"বাংলা গানের জুকবক্স",channel:"Music",thumbnail:""},
     {id:"sqKdI2lKYx8",title:"হিন্দি গানের জুকবক্স",channel:"Music",thumbnail:""},
@@ -77,13 +83,13 @@ export default function Home(){
     <section className="layout">
       <div className="watch">
         <div className="player">
-          {server===1?<VideoPlayer src={selected?.stream_url||""}/>:<iframe className="server2-frame" key={musicVideo.id} src={`https://www.youtube-nocookie.com/embed/${musicVideo.id}?autoplay=1&rel=0`} title={musicVideo.title} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen/>}
+          {server===1?<VideoPlayer src={selected?.stream_url||""}/>:server===2?<iframe className="server2-frame" key={musicVideo.id} src={`https://www.youtube-nocookie.com/embed/${musicVideo.id}?autoplay=1&rel=0`} title={musicVideo.title} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen/>:<VideoPlayer key={selectedSport.id} src={selectedSport.stream_url}/>}
         </div>
-        <div className="now"><i/><span><small>{server===1?"CURRENTLY SELECTED":"NOW PLAYING"}</small><b>{server===1?(selected?.name||"Select a channel"):musicVideo.title}</b></span><strong>{server===1?"● LIVE":"♫ MUSIC"}</strong></div>
+        <div className="now"><i/><span><small>{server===1?"CURRENTLY SELECTED":server===2?"NOW PLAYING":"SPORTS CHANNEL"}</small><b>{server===1?(selected?.name||"Select a channel"):server===2?musicVideo.title:selectedSport.name}</b></span><strong>{server===1?"● LIVE":server===2?"♫ MUSIC":"🏆 SPORTS"}</strong></div>
       </div>
       <aside id="channels">
-        <div className="aside-heading"><span className="aside-icon">▣</span><span><b>{server===1?"Available Channels":"Music Zone"}</b><small>{server===1?"Watch your favourite TV channels":"Search and play music"}</small></span></div>
-        <div className="server-switch"><button type="button" className={server===1?"selected":""} onClick={()=>setServer(1)}>⚡ Server 1 · Live TV</button><button type="button" className={server===2?"selected":""} onClick={()=>setServer(2)}>⚡ Server 2 · Music Zone</button></div>
+        <div className="aside-heading"><span className="aside-icon">▣</span><span><b>{server===1?"Available Channels":server===2?"Music Zone":"Sports Channels"}</b><small>{server===1?"Watch your favourite TV channels":server===2?"Search and play music":"Official sports broadcaster channels"}</small></span></div>
+        <div className="server-switch"><button type="button" className={server===1?"selected":""} onClick={()=>setServer(1)}>⚡ Server 1 · Live TV</button><button type="button" className={server===2?"selected":""} onClick={()=>setServer(2)}>⚡ Server 2 · Music Zone</button><button type="button" className={server===3?"selected":""} onClick={()=>setServer(3)}>🏆 Server 3 · Sports</button></div>
         {server===1?<><input className="search" placeholder="Search live channel..." value={query} onChange={e=>setQuery(e.target.value)}/><select className="category" value={category} onChange={e=>setCategory(e.target.value)}>{cats.map(c=><option key={c}>{c}</option>)}</select><div className="channels">{shown.map(c=><button className={selected?.id===c.id?"channel active":"channel"} key={c.id} onClick={()=>setSelected(c)}><span className="channel-logo"><img src={channelLogos[c.name]||c.logo_url||""} alt={c.name+" logo"} onError={e=>{e.currentTarget.style.display="none";}}/><b>{c.name.slice(0,2).toUpperCase()}</b></span><span><strong>{c.name}</strong><small>{c.category} · {c.country}</small></span><i>●</i></button>)}</div></>:<>
           <h3 className="music-list-title">গানের ক্যাটাগরি</h3>
           <div className="music-category-buttons">{musicCategories.map(item=><button type="button" key={item.label} disabled={musicLoading} onClick={()=>{setMusicQuery(item.query);void runMusicSearch(item.query);}}>{item.label}</button>)}</div>
@@ -92,7 +98,7 @@ export default function Home(){
           <div className="music-side-controls"><button type="button" onClick={()=>changeMusic(-1)} disabled={musicIndex<=0}>আগের গান</button><button type="button" onClick={()=>changeMusic(1)} disabled={musicIndex<0||musicIndex>=musicVideos.length-1}>পরের গান</button></div>
           <h3 className="music-list-title">গানের তালিকা</h3>
           <div className="music-grid">{musicVideos.map(item=><button type="button" key={item.id} className={musicVideo.id===item.id?"music-choice active":"music-choice"} onClick={()=>setMusicVideo(item)}><img src={item.thumbnail||`https://i.ytimg.com/vi/${item.id}/mqdefault.jpg`} alt=""/><span><strong>{item.title}</strong><small>{item.channel||"YouTube"}</small></span></button>)}</div>
-        </>}
+        </>:<div className="channels">{sportsChannels.map(item=><button type="button" className={selectedSport.id===item.id?"channel active":"channel"} key={item.id} onClick={()=>setSelectedSport(item)}><span className="channel-logo"><b>{item.name==="T Sports"?"TS":item.name==="Star Sports"?"SS":"SN"}</b></span><span><strong>{item.name}</strong><small>{item.country} · Official YouTube</small></span><i>▶</i></button>)}<p className="sports-note">লাইভ সম্প্রচার সবসময় চালু নাও থাকতে পারে। কোনো ম্যাচ বা লাইভ ভিডিও না থাকলে ওই চ্যানেলের অফিসিয়াল YouTube ভিডিও/পেজ দেখা যাবে।</p></div>}
       </aside>
     </section>
     <section className="about-strip" id="about"><div><span className="about-symbol">◉</span><span><b>Melandaha Live TV সম্পর্কে</b><small>Melandaha Live TV একটি অনলাইন টিভি ও বিনোদন প্ল্যাটফর্ম। এখানে দর্শকরা বাংলাদেশের জনপ্রিয় টিভি চ্যানেল দেখতে পারবেন এবং Music Zone থেকে বাংলা, হিন্দি, ভোজপুরি ও অন্যান্য ভাষার গান উপভোগ করতে পারবেন। আমাদের লক্ষ্য হলো সহজে এবং এক জায়গায় খবর ও বিনোদন পৌঁছে দেওয়া।</small></span></div><span className="about-note">Melandaha Live TV <i>·</i> Stay Connected, Stay Informed</span></section>
