@@ -62,7 +62,7 @@ export default function Home(){
   const shown=useMemo(()=>channels.filter(c=>(category==="All Categories"||c.category===category)&&c.name.toLowerCase().includes(query.toLowerCase())),[channels,category,query]);
 
   return <main className="portal">
-    <header className="site-header"><a className="brand" href="/" aria-label="Melandaha Live TV home"><span className="brand-mark"><b>M</b><i>▶</i></span><span className="brand-copy"><strong>Melandaha <em>Live TV</em></strong><small>Stay Connected · Stay Informed</small></span></a><nav className="main-nav"><a className="nav-active" href="/">Home</a><a href="#channels">Channels</a><a href="#about">About</a><a href="mailto:contact@melandahalivetv.com">Contact</a></nav><div className="header-actions"><span className="live-pill"><i/> LIVE</span><a className="header-admin" href="/admin">Admin</a></div></header>
+    <header className="site-header"><a className="brand" href="/" aria-label="Melandaha Live TV home"><span className="brand-mark"><b>M</b><i>▶</i></span><span className="brand-copy"><strong>Melandaha <em>Live TV</em></strong><small>Stay Connected · Stay Informed</small></span></a><nav className="main-nav"><a className="nav-active" href="/">Home</a><a href="#channels">Channels</a><a href="#about">About</a><a href="#contact">Contact</a></nav><div className="header-actions"><span className="live-pill"><i/> LIVE</span><a className="header-admin" href="/admin">Admin</a></div></header>
     <section className="welcome-strip"><span>বাংলাদেশের খবর ও বিনোদন, এক জায়গায়</span><small>LIVE TV <b>•</b> MUSIC ZONE</small></section>
     <section className="layout">
       <div className="watch">
@@ -86,6 +86,7 @@ export default function Home(){
       </aside>
     </section>
     <section className="about-strip" id="about"><div><span className="about-symbol">◉</span><span><b>Live television, made simple</b><small>News, entertainment and music in one place.</small></span></div><span className="about-note">Melandaha Live TV <i>·</i> Stay Connected, Stay Informed</span></section>
+    <section className="contact-section" id="contact"><div className="contact-heading"><span>CONTACT</span><h2>যোগাযোগ করুন</h2><p>চ্যানেল, সম্প্রচার বা যেকোনো বিষয়ে আমাদের সঙ্গে যোগাযোগ করুন।</p></div><div className="contact-methods"><a href="tel:+8801929543354" className="contact-card"><span className="contact-icon">☎</span><span><small>PHONE</small><b>01929543354</b><em>কল করুন</em></span></a><a href="https://wa.me/8801929543354" target="_blank" rel="noreferrer" className="contact-card"><span className="contact-icon">◉</span><span><small>WHATSAPP</small><b>01929543354</b><em>WhatsApp-এ মেসেজ দিন</em></span></a><a href="mailto:nurnobikhan553@gmail.com" className="contact-card"><span className="contact-icon">✉</span><span><small>EMAIL</small><b>nurnobikhan553@gmail.com</b><em>ইমেইল পাঠান</em></span></a></div></section>
     <footer className="site-footer"><span>© {new Date().getFullYear()} Melandaha Live TV. All rights reserved.</span><span>Authorized streams only <b>•</b> Made for viewers in Bangladesh</span></footer>
   </main>;
 }
