@@ -63,7 +63,7 @@ export default function Home(){
     "Jamuna TV":"https://commons.wikimedia.org/wiki/Special:FilePath/Jamuna_TV_logo.svg",
     "Ekattor TV":"https://cdn.brandfetch.io/idQsBNyhmW/w/400/h/400/theme/dark/icon.png?c=1bxid64Mup7aczewSAYMX&t=1766305016347",
     "Channel One":"https://www.rupalibangladesh.com/media/imgAll/2024August/BeFunky-collage---2025-01-23T192421492-20250123132708.jpg",
-    "Independent TV":"https://freekaj.com/assets/images/stock/image/2024/01/14/65a43a0c66cd91705261580.jpg",
+    "Independent TV":"https://commons.wikimedia.org/wiki/Special:FilePath/Independent_Television_Logo.svg",
     "Channel 24":"https://commons.wikimedia.org/wiki/Special:FilePath/Channel24logo.svg",
     "BTV":"https://www.lyngsat.com/logo/tv/bb/btv-national-bd.png",
     "RTV":"https://www.lyngsat.com/logo/tv/rr/rtv-news-bd.svg"
