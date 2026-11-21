@@ -60,12 +60,12 @@ export default function Home(){
   },[]);
   const channelLogos:Record<string,string>={
     "Somoy TV":"https://www.lyngsat.com/logo/tv/ss/somoy_news.png",
-    "Jamuna TV":"https://www.lyngsat.com/logo/tv/jj/jamuna_tv_bd.png",
+    "Jamuna TV":"https://commons.wikimedia.org/wiki/Special:FilePath/Jamuna_TV_logo.svg",
     "Ekattor TV":"https://www.lyngsat.com/logo/tv/ee/ekattor_tv.png",
     "Channel One":"https://www.lyngsat.com/logo/tv/cc/channel-1-bd.svg",
-    "BTV":"https://www.lyngsat.com/logo/tv/bb/btv-national-bd.png",
-    "Independent TV":"https://www.lyngsat.com/logo/tv/ii/independent_tv.png",
-    "Channel 24":"https://www.lyngsat.com/logo/tv/cc/channel24_bd.png",
+    "BTV":"https://commons.wikimedia.org/wiki/Special:FilePath/Bangladesh_Television_logo.svg",
+    "Independent TV":"https://commons.wikimedia.org/wiki/Special:FilePath/Independenttvlogo.png",
+    "Channel 24":"https://commons.wikimedia.org/wiki/Special:FilePath/Channel24logo.svg",
     "RTV":"https://www.lyngsat.com/logo/tv/rr/rtv-news-bd.svg"
   };
   const cats=["All Categories",...Array.from(new Set(channels.map(c=>c.category)))];
@@ -84,7 +84,7 @@ export default function Home(){
       <aside id="channels">
         <div className="aside-heading"><span className="aside-icon">▣</span><span><b>{server===1?"Available Channels":"Music Zone"}</b><small>{server===1?"Watch your favourite TV channels":"Search and play music"}</small></span></div>
         <div className="server-switch"><button type="button" className={server===1?"selected":""} onClick={()=>setServer(1)}>⚡ Server 1 · Live TV</button><button type="button" className={server===2?"selected":""} onClick={()=>setServer(2)}>⚡ Server 2 · Music Zone</button></div>
-        {server===1?<><input className="search" placeholder="Search live channel..." value={query} onChange={e=>setQuery(e.target.value)}/><select className="category" value={category} onChange={e=>setCategory(e.target.value)}>{cats.map(c=><option key={c}>{c}</option>)}</select><div className="channels">{shown.map(c=><button className={selected?.id===c.id?"channel active":"channel"} key={c.id} onClick={()=>setSelected(c)}><span className="channel-logo"><img src={c.logo_url||channelLogos[c.name]||""} alt={c.name+" logo"} onError={e=>{e.currentTarget.style.display="none";}}/><b>{c.name.slice(0,2).toUpperCase()}</b></span><span><strong>{c.name}</strong><small>{c.category} · {c.country}</small></span><i>●</i></button>)}</div></>:<>
+        {server===1?<><input className="search" placeholder="Search live channel..." value={query} onChange={e=>setQuery(e.target.value)}/><select className="category" value={category} onChange={e=>setCategory(e.target.value)}>{cats.map(c=><option key={c}>{c}</option>)}</select><div className="channels">{shown.map(c=><button className={selected?.id===c.id?"channel active":"channel"} key={c.id} onClick={()=>setSelected(c)}><span className="channel-logo"><img src={channelLogos[c.name]||c.logo_url||""} alt={c.name+" logo"} onError={e=>{e.currentTarget.style.display="none";}}/><b>{c.name.slice(0,2).toUpperCase()}</b></span><span><strong>{c.name}</strong><small>{c.category} · {c.country}</small></span><i>●</i></button>)}</div></>:<>
           <h3 className="music-list-title">গানের ক্যাটাগরি</h3>
           <div className="music-category-buttons">{musicCategories.map(item=><button type="button" key={item.label} disabled={musicLoading} onClick={()=>{setMusicQuery(item.query);void runMusicSearch(item.query);}}>{item.label}</button>)}</div>
           <form className="music-search" onSubmit={searchMusic}><input value={musicQuery} onChange={e=>setMusicQuery(e.target.value)} placeholder="গানের নাম লিখে সার্চ করুন..."/><button type="submit" disabled={musicLoading}>{musicLoading?"খুঁজছে...":"সার্চ"}</button></form>
