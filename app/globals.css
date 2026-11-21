@@ -107,3 +107,11 @@ aside{padding:17px;background:linear-gradient(180deg,#121d30,#101827);gap:12px}.
 .server-switch{grid-template-columns:repeat(3,minmax(0,1fr))}
 .sports-note{font-size:11px;line-height:1.7;color:#a9b9ce;background:#111e30;border:1px solid #2b3c55;border-radius:9px;padding:10px;margin:8px 0 0}
 @media(max-width:480px){.server-switch{grid-template-columns:1fr}}
+
+
+/* Official sports streaming handoff card */
+.official-stream-card{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:24px;text-align:center;background:radial-gradient(circle at 50% 35%,#173b63,#071426 72%);color:#fff}
+.official-stream-icon{display:grid;place-items:center;width:58px;height:58px;border-radius:50%;background:#e32636;font-size:25px;box-shadow:0 0 30px #e3263660}
+.official-stream-card h2{margin:0;font-size:clamp(18px,3vw,28px)}
+.official-stream-card p{max-width:520px;margin:0;color:#c5d3e4;font-size:14px;line-height:1.7}
+.official-stream-card .website-fallback{display:inline-flex;align-items:center;justify-content:center;margin-top:8px;padding:12px 22px;border-radius:24px;background:#e32636;color:white;font-weight:800;text-decoration:none}
