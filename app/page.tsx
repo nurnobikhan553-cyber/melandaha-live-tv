@@ -24,18 +24,29 @@ export default function Home(){
   const [musicLoading,setMusicLoading]=useState(false);
   const musicIndex=musicVideos.findIndex(v=>v.id===musicVideo.id);
 
-  async function searchMusic(e:any){
-    e.preventDefault();
-    if(!musicQuery.trim())return;
+  const musicCategories=[
+    {label:"বাংলা গান",query:"Bangla popular songs"},
+    {label:"হিন্দি গান",query:"Hindi hit songs"},
+    {label:"ভোজপুরি গান",query:"Bhojpuri hit songs"},
+    {label:"ইংরেজি গান",query:"English hit songs"},
+    {label:"ইসলামিক গান",query:"Bangla Islamic nasheed"},
+    {label:"পুরোনো গান",query:"Evergreen old songs"}
+  ];
+  async function runMusicSearch(term:string){
+    if(!term.trim())return;
     setMusicLoading(true);setMusicError("");
     try{
-      const res=await fetch("/api/music-search?q="+encodeURIComponent(musicQuery.trim()));
+      const res=await fetch("/api/music-search?q="+encodeURIComponent(term.trim()));
       const data=await res.json();
       if(!res.ok)throw new Error(data.error||"গান খুঁজে পাওয়া যায়নি");
       if(!data.items?.length)throw new Error("কোনো গান পাওয়া যায়নি");
       setMusicVideos(data.items);setMusicVideo(data.items[0]);
     }catch(err:any){setMusicError(err.message||"সার্চ করা যায়নি");}
     finally{setMusicLoading(false);}
+  }
+  async function searchMusic(e:any){
+    e.preventDefault();
+    await runMusicSearch(musicQuery);
   }
   function changeMusic(step:number){
     const next=musicIndex+step;
@@ -62,6 +73,8 @@ export default function Home(){
       <aside>
         <div className="server-switch"><button type="button" className={server===1?"selected":""} onClick={()=>setServer(1)}>⚡ Server 1 · Live TV</button><button type="button" className={server===2?"selected":""} onClick={()=>setServer(2)}>⚡ Server 2 · Music Zone</button></div>
         {server===1?<><input className="search" placeholder="Search live channel..." value={query} onChange={e=>setQuery(e.target.value)}/><select className="category" value={category} onChange={e=>setCategory(e.target.value)}>{cats.map(c=><option key={c}>{c}</option>)}</select><div className="channels">{shown.map(c=><button className={selected?.id===c.id?"channel active":"channel"} key={c.id} onClick={()=>setSelected(c)}><b>{c.name.slice(0,2).toUpperCase()}</b><span><strong>{c.name}</strong><small>{c.category} · {c.country}</small></span><i>●</i></button>)}</div><a className="adminlink" href="/admin">Admin Panel</a></>:<>
+          <h3 className="music-list-title">গানের ক্যাটাগরি</h3>
+          <div className="music-category-buttons">{musicCategories.map(item=><button type="button" key={item.label} disabled={musicLoading} onClick={()=>{setMusicQuery(item.query);void runMusicSearch(item.query);}}>{item.label}</button>)}</div>
           <form className="music-search" onSubmit={searchMusic}><input value={musicQuery} onChange={e=>setMusicQuery(e.target.value)} placeholder="গানের নাম লিখে সার্চ করুন..."/><button type="submit" disabled={musicLoading}>{musicLoading?"খুঁজছে...":"সার্চ"}</button></form>
           {musicError&&<p className="music-error">{musicError}</p>}
           <div className="music-side-controls"><button type="button" onClick={()=>changeMusic(-1)} disabled={musicIndex<=0}>আগের গান</button><button type="button" onClick={()=>changeMusic(1)} disabled={musicIndex<0||musicIndex>=musicVideos.length-1}>পরের গান</button></div>
