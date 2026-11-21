@@ -58,6 +58,16 @@ export default function Home(){
       if(data?.length){setChannels(data as Channel[]);setSelected(data[0] as Channel);}
     });
   },[]);
+  const channelLogoDomains:Record<string,string>={
+    "Somoy TV":"somoynews.tv",
+    "Jamuna TV":"jamuna.tv",
+    "Ekattor TV":"ekattor.tv",
+    "Channel One":"channelonebd.tv",
+    "BTV":"btv.gov.bd",
+    "Independent TV":"independent24.com",
+    "Channel 24":"channel24bd.tv",
+    "RTV":"rtvonline.com"
+  };
   const cats=["All Categories",...Array.from(new Set(channels.map(c=>c.category)))];
   const shown=useMemo(()=>channels.filter(c=>(category==="All Categories"||c.category===category)&&c.name.toLowerCase().includes(query.toLowerCase())),[channels,category,query]);
 
@@ -74,7 +84,7 @@ export default function Home(){
       <aside id="channels">
         <div className="aside-heading"><span className="aside-icon">▣</span><span><b>{server===1?"Available Channels":"Music Zone"}</b><small>{server===1?"Watch your favourite TV channels":"Search and play music"}</small></span></div>
         <div className="server-switch"><button type="button" className={server===1?"selected":""} onClick={()=>setServer(1)}>⚡ Server 1 · Live TV</button><button type="button" className={server===2?"selected":""} onClick={()=>setServer(2)}>⚡ Server 2 · Music Zone</button></div>
-        {server===1?<><input className="search" placeholder="Search live channel..." value={query} onChange={e=>setQuery(e.target.value)}/><select className="category" value={category} onChange={e=>setCategory(e.target.value)}>{cats.map(c=><option key={c}>{c}</option>)}</select><div className="channels">{shown.map(c=><button className={selected?.id===c.id?"channel active":"channel"} key={c.id} onClick={()=>setSelected(c)}><b>{c.name.slice(0,2).toUpperCase()}</b><span><strong>{c.name}</strong><small>{c.category} · {c.country}</small></span><i>●</i></button>)}</div><a className="adminlink" href="/admin">Admin Panel</a></>:<>
+        {server===1?<><input className="search" placeholder="Search live channel..." value={query} onChange={e=>setQuery(e.target.value)}/><select className="category" value={category} onChange={e=>setCategory(e.target.value)}>{cats.map(c=><option key={c}>{c}</option>)}</select><div className="channels">{shown.map(c=><button className={selected?.id===c.id?"channel active":"channel"} key={c.id} onClick={()=>setSelected(c)}><span className="channel-logo">{c.logo_url?<img src={c.logo_url} alt={c.name+" logo"} onError={e=>{e.currentTarget.style.display="none";}}/>:<img src={`https://www.google.com/s2/favicons?domain=${channelLogoDomains[c.name]||"google.com"}&sz=128`} alt={c.name+" logo"} onError={e=>{e.currentTarget.style.display="none";}}/>}<b>{c.name.slice(0,2).toUpperCase()}</b></span><span><strong>{c.name}</strong><small>{c.category} · {c.country}</small></span><i>●</i></button>)}</div><a className="adminlink" href="/admin">Admin Panel</a></>:<>
           <h3 className="music-list-title">গানের ক্যাটাগরি</h3>
           <div className="music-category-buttons">{musicCategories.map(item=><button type="button" key={item.label} disabled={musicLoading} onClick={()=>{setMusicQuery(item.query);void runMusicSearch(item.query);}}>{item.label}</button>)}</div>
           <form className="music-search" onSubmit={searchMusic}><input value={musicQuery} onChange={e=>setMusicQuery(e.target.value)} placeholder="গানের নাম লিখে সার্চ করুন..."/><button type="submit" disabled={musicLoading}>{musicLoading?"খুঁজছে...":"সার্চ"}</button></form>
