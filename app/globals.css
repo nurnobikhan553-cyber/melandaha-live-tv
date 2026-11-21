@@ -60,3 +60,12 @@ aside{padding:17px;background:linear-gradient(180deg,#121d30,#101827);gap:12px}.
 @media(max-width:1050px){.site-header{flex-wrap:wrap;padding:16px 0}.brand{min-width:0}.main-nav{order:3;width:100%;justify-content:center}.header-actions{margin-left:auto}}
 @media(max-width:800px){.portal{padding:0 12px}.layout{grid-template-columns:1fr}.watch{border:0;border-bottom:1px solid #293951}.welcome-strip{font-size:13px}.about-strip{align-items:flex-start;flex-direction:column}.site-footer{flex-direction:column}.channels{max-height:420px}}
 @media(max-width:480px){.brand-mark{width:47px;height:47px;border-radius:13px}.brand-mark b{font-size:30px}.brand-copy strong{font-size:18px}.brand-copy small{font-size:10px}.header-actions{gap:5px}.header-admin{padding:8px;font-size:11px}.live-pill{padding:8px;font-size:10px}.main-nav a{padding:9px 11px;font-size:12px}.welcome-strip{align-items:flex-start;gap:10px;flex-direction:column}.watch,aside{padding:12px}.server-switch button{font-size:11px}.about-strip{padding:14px}}
+
+.contact-section{margin:17px 0;background:linear-gradient(135deg,#111f32,#101827);border:1px solid #2b3c55;border-radius:14px;padding:22px}
+.contact-heading{text-align:center;margin-bottom:18px}.contact-heading>span{font-size:10px;font-weight:800;letter-spacing:2px;color:#ff5360}.contact-heading h2{font-size:22px;margin:6px 0}.contact-heading p{font-size:12px;color:#9aabc0;margin:0}
+.contact-methods{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.contact-card{display:flex;align-items:center;gap:12px;min-width:0;padding:15px;background:#151f30;border:1px solid #2a3b53;border-radius:11px;color:#f6f8fc;text-decoration:none;transition:.2s}
+.contact-card:hover{border-color:#ed3442;background:#271923;transform:translateY(-2px)}
+.contact-icon{flex:0 0 40px;width:40px;height:40px;display:grid;place-items:center;border-radius:10px;background:#351821;color:#ff6570;font-size:20px}
+.contact-card>span:last-child{display:grid;gap:4px;min-width:0}.contact-card small{font-size:9px;letter-spacing:1.4px;color:#91a4bd;font-weight:800}.contact-card b{font-size:13px;overflow-wrap:anywhere}.contact-card em{font-size:10px;color:#59d99b;font-style:normal}
+@media(max-width:700px){.contact-methods{grid-template-columns:1fr}.contact-section{padding:16px}.contact-heading h2{font-size:19px}}
