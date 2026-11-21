@@ -37,13 +37,32 @@ export default function VideoPlayer({src}:{src:string}){
   const ref=useRef<HTMLVideoElement>(null);
   const [started,setStarted]=useState(false);
   const [error,setError]=useState("");
+  const [resolvedChannelId,setResolvedChannelId]=useState("");
+  const [resolvingChannel,setResolvingChannel]=useState(false);
   const embedUrl=youtubeEmbedUrl(src);
+  useEffect(()=>{
+    setResolvedChannelId("");
+    setResolvingChannel(false);
+    try{
+      const url=new URL(src);
+      const handle=url.pathname.split("/").filter(Boolean)[0];
+      if((url.hostname==="youtube.com"||url.hostname==="www.youtube.com")&&handle?.toLowerCase()==="@channelonenewsbd"){
+        setResolvingChannel(true);
+        fetch("/api/youtube-channel?handle=Channelonenewsbd")
+          .then(r=>r.ok?r.json():Promise.reject(new Error("Channel lookup failed")))
+          .then(data=>setResolvedChannelId(data.channelId||""))
+          .catch(()=>setError("Channel One-এর YouTube Channel ID পাওয়া যায়নি।"))
+          .finally(()=>setResolvingChannel(false));
+      }
+    }catch{}
+  },[src]);
+  const effectiveEmbedUrl=embedUrl||(resolvedChannelId?"https://www.youtube-nocookie.com/embed/live_stream?channel="+resolvedChannelId+"&autoplay=1":null);
   const isHls=/\.m3u8(?:$|[?#])/i.test(src);
-  const isWebsite=!!src&&/^https?:\/\//i.test(src)&&!embedUrl&&!isHls;
+  const isWebsite=!!src&&/^https?:\/\//i.test(src)&&!effectiveEmbedUrl&&!isHls;
   useEffect(()=>{setStarted(false);setError("");},[src]);
   useEffect(()=>{
     const v=ref.current;
-    if(!v||!src||embedUrl||!started)return;
+    if(!v||!src||effectiveEmbedUrl||!started)return;
     setError("");
     if(v.canPlayType("application/vnd.apple.mpegurl")){
       v.src=src;
@@ -59,9 +78,10 @@ export default function VideoPlayer({src}:{src:string}){
       return()=>h.destroy();
     }
     setError("এই ব্রাউজারে HLS স্ট্রিম সমর্থিত নয়।");
-  },[src,started,embedUrl]);
+  },[src,started,effectiveEmbedUrl]);
   if(!started)return <div className="poster"><div className="poster-copy"><small>WELCOME TO</small><h1>MELANDAHA<br/><b>LIVE TV</b></h1><p>Watch Live TV Anytime, Anywhere</p><span>TV CHANNELS　 •　 SPORTS　 •　 NEWS</span></div><button onClick={()=>src?setStarted(true):setError("এই চ্যানেলের অনুমোদিত স্ট্রিম URL এখনো যোগ করা হয়নি।")}>▶　CLICK TO PLAY</button>{error&&<small className="error">{error}</small>}</div>;
-  if(embedUrl)return <div className="playing"><iframe src={embedUrl} title="Live TV stream" allow="autoplay; encrypted-media; picture-in-picture" allowFullScreen/><button onClick={()=>setStarted(false)}>← Banner</button></div>;
+  if(resolvingChannel)return <div className="playing">Channel One লাইভ লোড হচ্ছে...</div>;
+  if(effectiveEmbedUrl)return <div className="playing"><iframe src={effectiveEmbedUrl} title="Live TV stream" allow="autoplay; encrypted-media; picture-in-picture" allowFullScreen/><button onClick={()=>setStarted(false)}>← Banner</button></div>;
   if(isWebsite)return <div className="playing website-playing"><iframe src={src} title="Official channel live page" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowFullScreen/><a className="website-fallback" href={src} target="_blank" rel="noopener noreferrer">প্লেয়ার না চললে অফিসিয়াল সাইটে দেখুন ↗</a><button onClick={()=>setStarted(false)}>← Banner</button></div>;
   return <div className="playing"><video ref={ref} controls playsInline autoPlay/><button onClick={()=>setStarted(false)}>← Banner</button>{error&&<p>{error}</p>}</div>;
 }
