@@ -7,7 +7,8 @@ const YOUTUBE_CHANNELS:Record<string,string>={
   "@ekattortelevision":"UCtqvtAVmad5zywaziN6CbfA",
   "@independenttelevision":"UCATUkaOHwO9EP_W87zCiPbA",
   "@jamunatvplus":"UCN6sm8iHiPd0cnoUardDAnw",
-  "@jamunatvbd":"UCN6sm8iHiPd0cnoUardDAnw"
+  "@jamunatvbd":"UCN6sm8iHiPd0cnoUardDAnw",
+  "@channel24digital":"UCxjW7P7mjX2yJ8x9lQkQKfQ"
 };
 
 function youtubeEmbedUrl(value:string):string|null{
