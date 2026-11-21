@@ -2,18 +2,33 @@
 import {useEffect,useRef,useState} from "react";
 import Hls from "hls.js";
 
+const YOUTUBE_CHANNELS:Record<string,string>={
+  "@somoytv":"UCxHoBXkY88Tb8z1Ssj6CWsQ",
+  "@ekattortelevision":"UCtqvtAVmad5zywaziN6CbfA",
+  "@independenttelevision":"UCATUkaOHwO9EP_W87zCiPbA",
+  "@jamunatvplus":"UCN6sm8iHiPd0cnoUardDAnw",
+  "@jamunatvbd":"UCN6sm8iHiPd0cnoUardDAnw"
+};
+
 function youtubeEmbedUrl(value:string):string|null{
   try{
     const url=new URL(value);
-    const host=url.hostname.replace(/^www\\./,"");
+    const host=url.hostname.replace(/^www\./,"");
     if(host==="youtu.be"){
       const id=url.pathname.split("/").filter(Boolean)[0];
       return id? `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`:null;
     }
     if(host!=="youtube.com"&&host!=="m.youtube.com"&&host!=="youtube-nocookie.com")return null;
     const parts=url.pathname.split("/").filter(Boolean);
-    const id=url.searchParams.get("v")||(parts[0]==="embed"||parts[0]==="live"?parts[1]:null);
-    return id? `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`:null;
+    const channelPath=parts[0]?.startsWith("@")?parts[0].toLowerCase():null;
+    const channelId=parts[0]==="channel"?parts[1]:null;
+    const mappedId=channelPath?YOUTUBE_CHANNELS[channelPath]:null;
+    if((channelId||mappedId)&&(parts[1]==="live"||parts.length===1||parts[0]==="channel")){
+      const id=channelId||mappedId;
+      return `https://www.youtube-nocookie.com/embed/live_stream?channel=${id}&autoplay=1`;
+    }
+    const videoId=url.searchParams.get("v")||(parts[0]==="embed"||parts[0]==="live"?parts[1]:null);
+    return videoId? `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`:null;
   }catch{return null;}
 }
 
