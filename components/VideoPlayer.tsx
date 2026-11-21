@@ -37,8 +37,8 @@ export default function VideoPlayer({src}:{src:string}){
   const [started,setStarted]=useState(false);
   const [error,setError]=useState("");
   const embedUrl=youtubeEmbedUrl(src);
-  const isHls=/\\.m3u8(?:$|[?#])/i.test(src);
-  const isWebsite=!!src&&/^https?:\\/\\//i.test(src)&&!embedUrl&&!isHls;
+  const isHls=/\.m3u8(?:$|[?#])/i.test(src);
+  const isWebsite=!!src&&/^https?:\/\//i.test(src)&&!embedUrl&&!isHls;
   useEffect(()=>{setStarted(false);setError("");},[src]);
   useEffect(()=>{
     const v=ref.current;
