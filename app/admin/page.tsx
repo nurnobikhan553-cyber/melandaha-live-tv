@@ -8,9 +8,12 @@ export default function Admin(){
   const [email,setEmail]=useState("");
   const [password,setPassword]=useState("");
   const [form,setForm]=useState({name:"",category:"News",country:"Bangladesh",stream_url:""});
-  const [msg,setMsg]=useState("Supabase credentials configure করুন।");
+  const [msg,setMsg]=useState("");
   async function load(){
-    if(!supabase)return;
+    if(!supabase){
+      setMsg("Supabase credentials configure করুন।");
+      return;
+    }
     const {data,error}=await supabase.from("channels").select("*").order("name");
     if(error)setMsg(error.message);else setRows((data||[]) as Channel[]);
   }
@@ -60,7 +63,7 @@ export default function Admin(){
       <button onClick={()=>saveStream(c.id,c.stream_url||"")}>Save stream URL</button>
       <button onClick={()=>del(c.id)}>Delete</button>
     </div>)}
-    <p>{msg}</p>
+    {msg && <p>{msg}</p>}
     <p>শুধু চ্যানেলের নিজস্ব বা লিখিত অনুমতিপ্রাপ্ত স্ট্রিম URL ব্যবহার করুন। YouTube watch/live URL এবং HLS .m3u8 URL সমর্থিত।</p>
   </main>;
 }
