@@ -59,15 +59,15 @@ export default function Home(){
     });
   },[]);
   const channelLogos:Record<string,string>={
-    "Somoy TV":"https://www.lyngsat.com/logo/tv/ss/somoy_news.png",
+    "Somoy TV":"https://assets-prod.services.toffeelive.com/w_480%2Cq_75%2Cf_webp/Xi_Ga5oBNnOkwJLWkhKP/posters/ef2899d5-1ae0-4fee-aee5-45f9b0b3ba80.png",
     "Jamuna TV":"https://commons.wikimedia.org/wiki/Special:FilePath/Jamuna_TV_logo.svg",
-    "Ekattor TV":"https://www.lyngsat.com/logo/tv/ee/ekattor_tv.png",
-    "Channel One":"https://www.lyngsat.com/logo/tv/cc/channel-1-bd.svg",
-    "BTV":"https://commons.wikimedia.org/wiki/Special:FilePath/Bangladesh_Television_logo.svg",
-    "Independent TV":"https://commons.wikimedia.org/wiki/Special:FilePath/Independenttvlogo.png",
+    "Ekattor TV":"https://cdn.brandfetch.io/idQsBNyhmW/w/400/h/400/theme/dark/icon.png?c=1bxid64Mup7aczewSAYMX&t=1766305016347",
+    "Channel One":"https://www.rupalibangladesh.com/media/imgAll/2024August/BeFunky-collage---2025-01-23T192421492-20250123132708.jpg",
+    "Independent TV":"https://freekaj.com/assets/images/stock/image/2024/01/14/65a43a0c66cd91705261580.jpg",
     "Channel 24":"https://commons.wikimedia.org/wiki/Special:FilePath/Channel24logo.svg",
+    "BTV":"https://www.lyngsat.com/logo/tv/bb/btv-national-bd.png",
     "RTV":"https://www.lyngsat.com/logo/tv/rr/rtv-news-bd.svg"
-  };
+  };;
   const cats=["All Categories",...Array.from(new Set(channels.map(c=>c.category)))];
   const shown=useMemo(()=>channels.filter(c=>(category==="All Categories"||c.category===category)&&c.name.toLowerCase().includes(query.toLowerCase())),[channels,category,query]);
 
