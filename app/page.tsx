@@ -62,7 +62,8 @@ export default function Home(){
   const shown=useMemo(()=>channels.filter(c=>(category==="All Categories"||c.category===category)&&c.name.toLowerCase().includes(query.toLowerCase())),[channels,category,query]);
 
   return <main className="portal">
-    <header className="socialbar"><a href="/">⌂</a><a href="#">◉</a><a href="#">➤</a><a href="#">▶</a><a href="#">f</a></header>
+    <header className="site-header"><a className="brand" href="/" aria-label="Melandaha Live TV home"><span className="brand-mark"><b>M</b><i>▶</i></span><span className="brand-copy"><strong>Melandaha <em>Live TV</em></strong><small>Stay Connected · Stay Informed</small></span></a><nav className="main-nav"><a className="nav-active" href="/">Home</a><a href="#channels">Channels</a><a href="#about">About</a><a href="mailto:contact@melandahalivetv.com">Contact</a></nav><div className="header-actions"><span className="live-pill"><i/> LIVE</span><a className="header-admin" href="/admin">Admin</a></div></header>
+    <section className="welcome-strip"><span>বাংলাদেশের খবর ও বিনোদন, এক জায়গায়</span><small>LIVE TV <b>•</b> MUSIC ZONE</small></section>
     <section className="layout">
       <div className="watch">
         <div className="player">
@@ -70,7 +71,8 @@ export default function Home(){
         </div>
         <div className="now"><i/><span><small>{server===1?"CURRENTLY SELECTED":"NOW PLAYING"}</small><b>{server===1?(selected?.name||"Select a channel"):musicVideo.title}</b></span><strong>{server===1?"● LIVE":"♫ MUSIC"}</strong></div>
       </div>
-      <aside>
+      <aside id="channels">
+        <div className="aside-heading"><span className="aside-icon">▣</span><span><b>{server===1?"Available Channels":"Music Zone"}</b><small>{server===1?"Watch your favourite TV channels":"Search and play music"}</small></span></div>
         <div className="server-switch"><button type="button" className={server===1?"selected":""} onClick={()=>setServer(1)}>⚡ Server 1 · Live TV</button><button type="button" className={server===2?"selected":""} onClick={()=>setServer(2)}>⚡ Server 2 · Music Zone</button></div>
         {server===1?<><input className="search" placeholder="Search live channel..." value={query} onChange={e=>setQuery(e.target.value)}/><select className="category" value={category} onChange={e=>setCategory(e.target.value)}>{cats.map(c=><option key={c}>{c}</option>)}</select><div className="channels">{shown.map(c=><button className={selected?.id===c.id?"channel active":"channel"} key={c.id} onClick={()=>setSelected(c)}><b>{c.name.slice(0,2).toUpperCase()}</b><span><strong>{c.name}</strong><small>{c.category} · {c.country}</small></span><i>●</i></button>)}</div><a className="adminlink" href="/admin">Admin Panel</a></>:<>
           <h3 className="music-list-title">গানের ক্যাটাগরি</h3>
@@ -83,6 +85,7 @@ export default function Home(){
         </>}
       </aside>
     </section>
-    <footer>Melandaha Live TV · Authorized streams only</footer>
+    <section className="about-strip" id="about"><div><span className="about-symbol">◉</span><span><b>Live television, made simple</b><small>News, entertainment and music in one place.</small></span></div><span className="about-note">Melandaha Live TV <i>·</i> Stay Connected, Stay Informed</span></section>
+    <footer className="site-footer"><span>© {new Date().getFullYear()} Melandaha Live TV. All rights reserved.</span><span>Authorized streams only <b>•</b> Made for viewers in Bangladesh</span></footer>
   </main>;
 }
