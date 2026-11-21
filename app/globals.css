@@ -101,3 +101,9 @@ aside{padding:17px;background:linear-gradient(180deg,#121d30,#101827);gap:12px}.
 /* Uploaded Melandaha Live TV header logo */
 .brand-mark{overflow:hidden;display:flex;align-items:center;justify-content:center;background:transparent!important;padding:0;border:0;box-shadow:none}
 .brand-mark img{display:block;width:100%;height:100%;object-fit:contain}
+
+
+/* Server 3 sports channel layout */
+.server-switch{grid-template-columns:repeat(3,minmax(0,1fr))}
+.sports-note{font-size:11px;line-height:1.7;color:#a9b9ce;background:#111e30;border:1px solid #2b3c55;border-radius:9px;padding:10px;margin:8px 0 0}
+@media(max-width:480px){.server-switch{grid-template-columns:1fr}}
