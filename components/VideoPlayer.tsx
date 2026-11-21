@@ -46,12 +46,13 @@ export default function VideoPlayer({src}:{src:string}){
     try{
       const url=new URL(src);
       const handle=url.pathname.split("/").filter(Boolean)[0];
-      if((url.hostname==="youtube.com"||url.hostname==="www.youtube.com")&&handle?.toLowerCase()==="@channelonenewsbd"){
+      const isYoutube=["youtube.com","www.youtube.com","m.youtube.com"].includes(url.hostname);
+      if(isYoutube&&handle?.startsWith("@")&&!YOUTUBE_CHANNELS[handle.toLowerCase()]){
         setResolvingChannel(true);
-        fetch("/api/youtube-channel?handle=Channelonenewsbd")
+        fetch("/api/youtube-channel?handle="+encodeURIComponent(handle))
           .then(r=>r.ok?r.json():Promise.reject(new Error("Channel lookup failed")))
           .then(data=>setResolvedChannelId(data.channelId||""))
-          .catch(()=>setError("Channel One-এর YouTube Channel ID পাওয়া যায়নি।"))
+          .catch(()=>setError("এই YouTube চ্যানেলটি এখন লোড করা যাচ্ছে না।"))
           .finally(()=>setResolvingChannel(false));
       }
     }catch{}
