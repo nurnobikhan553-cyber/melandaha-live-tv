@@ -9,3 +9,19 @@
 @media(max-width:650px){.music{padding:14px}.music-player{min-height:190px}.music-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
 .music-search{display:flex;gap:10px;margin:0 0 18px}.music-search input{flex:1;min-width:0;padding:14px 16px;border-radius:10px;border:1px solid #34445a;background:#202c3e;color:#fff;font-size:15px}.music-search button,.music-controls button{padding:12px 18px;border:0;border-radius:9px;background:#087bd2;color:#fff;font-weight:700;cursor:pointer}.music-search button:disabled,.music-controls button:disabled{opacity:.45;cursor:not-allowed}.music-error{color:#ff9c9c}.music-list-title{font-size:17px;margin:16px 0 10px}.music-choice img{width:120px;aspect-ratio:16/9;object-fit:cover;border-radius:7px;flex-shrink:0}.music-controls{display:flex;gap:8px}.music-controls button{padding:9px 12px}.music-choice span{min-width:0}.music-choice strong{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}@media(max-width:650px){.music-search button{padding:10px 14px}.music-choice img{width:94px}.music-controls button{font-size:12px;padding:8px}.music-caption{gap:10px}}
+
+/* Server 1 / Server 2 shared player layout */
+.player{position:relative;width:100%;aspect-ratio:16/9}
+.player>.server2-frame{position:absolute;inset:0;width:100%;height:100%;display:block;border:0}
+.server-switch{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.server-switch button{padding:13px 10px;border:1px solid #34445a;border-radius:10px;background:#202c3e;color:#dbe5f2;font-weight:700;cursor:pointer}
+.server-switch button.selected{background:#103b37;border-color:#12c99a;color:#fff}
+.music-side-controls{display:flex;gap:8px}
+.music-side-controls button{flex:1;padding:11px 8px;border:0;border-radius:9px;background:#087bd2;color:#fff;font-weight:700;cursor:pointer}
+.music-side-controls button:disabled{opacity:.4;cursor:not-allowed}
+aside .music-grid{display:flex;flex-direction:column;gap:8px;overflow:auto;max-height:54vh}
+aside .music-choice{width:100%;padding:8px;min-width:0}
+aside .music-choice img{width:112px}
+aside .music-choice span{min-width:0}
+@media(max-width:800px){aside .music-grid{max-height:420px}}
+@media(max-width:480px){.server-switch button{font-size:12px;padding:11px 6px}.player{min-height:190px}.now{align-items:flex-start}.now b{font-size:13px}}
