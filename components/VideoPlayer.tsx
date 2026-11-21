@@ -79,7 +79,7 @@ export default function VideoPlayer({src}:{src:string}){
     }
     setError("এই ব্রাউজারে HLS স্ট্রিম সমর্থিত নয়।");
   },[src,started,effectiveEmbedUrl]);
-  if(!started)return <div className="poster"><div className="poster-copy"><small>WELCOME TO</small><h1>MELANDAHA<br/><b>LIVE TV</b></h1><p>Watch Live TV Anytime, Anywhere</p><span>TV CHANNELS　 •　 SPORTS　 •　 NEWS</span></div><button onClick={()=>src?setStarted(true):setError("এই চ্যানেলের অনুমোদিত স্ট্রিম URL এখনো যোগ করা হয়নি।")}>▶　CLICK TO PLAY</button>{error&&<small className="error">{error}</small>}</div>;
+  if(!started)return <div className="poster poster-image"><img className="poster-banner-image" src="/melandaha-banner.png" alt="Melandaha Live TV" /><button className="poster-play-button" onClick={()=>src?setStarted(true):setError("এই চ্যানেলের অনুমোদিত স্ট্রিম URL এখনো যোগ করা হয়নি।")}>▶　CLICK TO PLAY</button>{error&&<small className="error">{error}</small>}</div>;
   if(resolvingChannel)return <div className="playing">Channel One লাইভ লোড হচ্ছে...</div>;
   if(effectiveEmbedUrl)return <div className="playing"><iframe src={effectiveEmbedUrl} title="Live TV stream" allow="autoplay; encrypted-media; picture-in-picture" allowFullScreen/><button onClick={()=>setStarted(false)}>← Banner</button></div>;
   if(isWebsite)return <div className="playing website-playing"><iframe src={src} title="Official channel live page" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowFullScreen/><a className="website-fallback" href={src} target="_blank" rel="noopener noreferrer">প্লেয়ার না চললে অফিসিয়াল সাইটে দেখুন ↗</a><button onClick={()=>setStarted(false)}>← Banner</button></div>;
