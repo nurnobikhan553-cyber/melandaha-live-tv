@@ -81,7 +81,8 @@ aside{padding:17px;background:linear-gradient(180deg,#121d30,#101827);gap:12px}.
 .channel-logo{position:relative;display:grid;place-items:center;flex:0 0 46px;width:46px;height:46px;overflow:hidden;border-radius:10px;background:#fff;border:1px solid #52647c}.channel-logo img{position:absolute;inset:0;z-index:1;width:100%;height:100%;object-fit:contain;padding:3px;background:#fff}.channel-logo b{position:relative;z-index:0;display:grid;place-items:center;width:100%;height:100%;background:linear-gradient(145deg,#f32635,#087d4b);color:#fff;font-size:13px}
 
 
-/* Uploaded Melandaha Live TV promotional banner */
-.promo-banner{width:100%;margin:0 0 18px;border:1px solid #2b3c55;border-radius:16px;overflow:hidden;background:#071426;box-shadow:0 16px 42px #0005}
-.promo-banner img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
-@media(max-width:650px){.promo-banner{border-radius:10px;margin-bottom:12px}.promo-banner img{aspect-ratio:16/9}}
+/* Custom promotional banner inside the video player */
+.poster-image{padding:0;display:block;background:#071426}
+.poster-banner-image{display:block;width:100%;height:100%;position:absolute;inset:0;object-fit:cover}
+.poster-play-button{position:absolute;z-index:2;left:50%;bottom:5%;transform:translateX(-50%);padding:12px 24px;border:2px solid #13c9ff;border-radius:30px;background:#071a46;color:#fff;font-weight:800;cursor:pointer;box-shadow:0 5px 20px #0008}
+.poster-image .error{left:12px;right:12px;text-align:center;background:#071426cc;padding:7px;border-radius:6px}
