@@ -15,7 +15,7 @@ export default function Home(){
   const sportsChannels=[
     {id:"t-sports",name:"T Sports",country:"Bangladesh",stream_url:"https://www.youtube.com/@tsportsbd/live",note:"Official YouTube live / videos"},
     {id:"sony-sports",name:"Sony Sports Network",country:"India",stream_url:"https://www.youtube.com/@SonySportsNetwork/live",note:"Official YouTube live / videos"},
-    {id:"star-sports",name:"Star Sports",country:"India",stream_url:"https://www.youtube.com/@StarSports/live",note:"Official YouTube live / videos"}
+    {id:"star-sports",name:"Star Sports",country:"India",stream_url:"https://www.youtube.com/@starsports/live",note:"Official YouTube live / videos"}
   ];
   const [selectedSport,setSelectedSport]=useState(sportsChannels[0]);
 
